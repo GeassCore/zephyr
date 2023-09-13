@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_SERIES_MILKV_CV180X
+	bool "MILKV CV180X series"
+	select RISCV
+	select SOC_FAMILY_RISCV_PRIVILEGED
+	help
+	  Enable support for Milk-V CV180X SoC Series.

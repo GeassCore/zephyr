@@ -1,0 +1,20 @@
+# Copyright (c) 2021 Rajnesh Kanwal <rajnesh.kanwal49@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+choice
+	prompt "Milk-V CV180X SoC"
+	depends on SOC_SERIES_MILKV_CV180X
+
+config SOC_RISCV_CV1800B
+	bool "Milk-V CV1800B"
+	select ATOMIC_OPERATIONS_BUILTIN
+	select INCLUDE_RESET_VECTOR
+	select 64BIT
+	select RISCV_ISA_RV64I
+	select RISCV_ISA_EXT_M
+	select RISCV_ISA_EXT_A
+	select RISCV_ISA_EXT_C
+	select RISCV_ISA_EXT_ZICSR
+	select RISCV_ISA_EXT_ZIFENCEI
+
+endchoice

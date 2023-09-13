@@ -1,0 +1,15 @@
+# Copyright (c) 2021 Katsuhiro Suzuki
+# SPDX-License-Identifier: Apache-2.0
+
+if BOARD_MILKV_DUO
+
+config BOARD
+	default "milkv_duo"
+
+config SYS_CLOCK_TICKS_PER_SEC
+	default 1000
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	default 1000000
+
+endif
