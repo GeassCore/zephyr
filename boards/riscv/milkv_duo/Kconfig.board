@@ -3,4 +3,4 @@
 
 config BOARD_MILKV_DUO
 	bool "MILK-V DUO target"
-	depends on SOC_RISCV_CV180X
+	depends on SOC_RISCV_CV1800B

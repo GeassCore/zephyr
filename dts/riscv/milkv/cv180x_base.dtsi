@@ -32,7 +32,7 @@
 			reg = <0x00>;
 			status = "okay";
 			compatible = "riscv";
-			riscv,isa = "rv64imafdvcsu";
+			riscv,isa = "rv64imafdc";
 			mmu-type = "riscv,sv39";
 			clock-frequency = <25000000>;
 
@@ -52,13 +52,15 @@
 		ranges;
 
 		plic0: interrupt-controller@70000000 {
+			compatible = "sifive,plic-1.0.0";
 			riscv,ndev = <101>;
 			riscv,max-priority = <0x07>;
-			reg-names = "control";
-			reg = <0x00 0x70000000 0x00 0x4000000>;
+			reg = <0x00 0x70000000 0x00 0x00002000
+                    0x00 0x70002000 0x00 0x001fe000
+                	0x00 0x70200000 0x00 0x03e00000>;
+            reg-names = "prio", "irq_en", "reg";
 			interrupts-extended = <&cpu0_intc 0xffffffff &cpu0_intc 0x09>;
 			interrupt-controller;
-			compatible = "riscv,plic0";
 			#interrupt-cells = <0x02>;
 			#address-cells = <0x00>;
 		};
@@ -67,7 +69,6 @@
 			compatible = "sifive,clint0";
 			interrupts-extended = <&cpu0_intc 0x03 &cpu0_intc 0x07>;
 			reg = <0x00 0x74000000 0x00 0x10000>;
-			clint,has-no-64bit-mmio;
 		};
 	};
 
@@ -75,23 +76,23 @@
 		#clock-cells = <0>;
 		compatible = "fixed-clock";
 		clock-frequency = <25000000>;
-		clock-output-names = "osc";
 	};
 
+#if 0
 	clk: clock-controller {
 		compatible = "cvitek,cv180x-clk";
 		reg = <0x0 0x03002000 0x0 0x1000>;
 		clocks = <&osc>;
 		#clock-cells = <1>;
 	};
+#endif
 
 	uart0: serial@04140000 {
 		compatible = "ns16550";
+		interrupt-parent = <&plic0>;
+		interrupts = <44 IRQ_TYPE_LEVEL_HIGH>;
 		reg = <0x0 0x04140000 0x0 0x1000>;
 		clock-frequency = <25000000>;
 		reg-shift = <2>;
-		reg-io-width = <4>;
-		interrupts = <44 IRQ_TYPE_LEVEL_HIGH>;
-		interrupt-parent = <&plic0>;
 	};
 };
