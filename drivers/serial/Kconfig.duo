@@ -1,0 +1,18 @@
+# Milk-v Duo UART configuration option
+
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig UART_DUO
+	bool "Duo serial driver"
+	default y
+	depends on DT_HAS_DUO_UART0_ENABLED
+	select SERIAL_HAS_DRIVER
+	help
+	  This option enables DuoUART serial driver.
+
+menuconfig UART_DUO_PORT_0
+	bool "DUO Port 0"
+	depends on UART_DUO
+	help
+	  This tells the driver to configure the UART port at boot, depending on
+	  the additional configure options below.
