@@ -1,0 +1,5 @@
+board:
+  name: a733_e902
+  vendor: openaw
+  socs:
+    - name: sun60i_e902

@@ -1,0 +1,4 @@
+config SOC_SUN60I_E902
+ bool
+config SOC
+ default "sun60i_e902" if SOC_SUN60I_E902

@@ -1,0 +1,10 @@
+if SOC_SUN60I_E902
+config RISCV_MCAUSE_EXCEPTION_MASK
+ default 0xfff
+config RISCV_TRAP_HANDLER_ALIGNMENT
+ default 64
+config NUM_IRQS
+ default 208
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+ default 1000
+endif
