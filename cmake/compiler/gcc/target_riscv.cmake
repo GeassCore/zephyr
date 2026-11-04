@@ -46,11 +46,13 @@ if(CONFIG_RISCV_ISA_EXT_C)
   string(CONCAT riscv_march ${riscv_march} "c")
 endif()
 
-if(CONFIG_RISCV_ISA_EXT_ZICSR)
+# GCC before 11 treats CSR and fence.i as part of the base ISA, and does not
+# accept the newer explicit Z-extension spelling. Preserve the configured ISA.
+if(CONFIG_RISCV_ISA_EXT_ZICSR AND GCC_COMPILER_VERSION VERSION_GREATER_EQUAL 11.0)
   string(CONCAT riscv_march ${riscv_march} "_zicsr")
 endif()
 
-if(CONFIG_RISCV_ISA_EXT_ZIFENCEI)
+if(CONFIG_RISCV_ISA_EXT_ZIFENCEI AND GCC_COMPILER_VERSION VERSION_GREATER_EQUAL 11.0)
   string(CONCAT riscv_march ${riscv_march} "_zifencei")
 endif()
 
